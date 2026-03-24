@@ -247,4 +247,290 @@
         // === DATA ESTRUCTURADA ===
         const misProyectos = [
             {id:"sj7p0fIJyx8",portada:"Portada1.webp",titulo:"Motion graphics Promo",match:"98%",year:"2024",calidad:"4K",desc:"Motion Graphics Avanzado: Creación de interfaces dinámicas y trackeo de puntos."},
-           
+                       {id:"VJDT3QK2SDc",portada:"Portada2.webp",titulo:"Motion graphics 3D",match:"95%",year:"2023",calidad:"HD",desc:"Edición de Continuidad: Montaje de video enfocado en el ritmo narrativo."},
+            {id:"wlzmrM0FVF8",portada:"Portada3.webp",titulo:"Animacion 3D",match:"92%",year:"2024",calidad:"4K",desc:"Manipulación de Tiempo: Aplicación de time-remapping y curvas de velocidad."},
+            {id:"9bbZRO4BJtE",portada:"Portada4.webp",titulo:"Video promocional",match:"89%",year:"2024",calidad:"4K",desc:"Animación de Producto: Desarrollo de piezas publicitarias con tipografía cinética."},
+            {id:"5FBR0oQc5UQ",portada:"Portada5.webp",titulo:"Animacion logo IG",match:"97%",year:"2024",calidad:"4K",desc:"Composición y Máscaras: Integración de elementos gráficos detrás de sujetos."},
+            {id:"9gqnfDxawBM",portada:"Portada6.webp",titulo:"Montaje técnico",match:"97%",year:"2024",calidad:"4K",desc:"VFX & Limpieza: Eliminación de objetos no deseados y parches digitales."},
+            {id:"LGx94GFHouA",portada:"Portada7.webp",titulo:"Propuesta portafolio",match:"97%",year:"2024",calidad:"4K",desc:"Color Grading: Etalonaje digital profesional para estética visual coherente."},
+            {id:"uHU0e6H3sdo",portada:"Portada8.webp",titulo:"El Infiltrado",match:"97%",year:"2024",calidad:"4K",desc:"Efectos Digitales: Creación de texturas y mapas de desplazamiento."},
+            {id:"_g7NjzeHbjw",portada:"Portada9.webp",titulo:"Intro logo 3D",match:"97%",year:"2024",calidad:"4K",desc:"Final Cut & Exportación: Optimización para diferentes plataformas digitales."},
+            {id:"H2mck1Yhdm8",portada:"Portada10.webp",titulo:"Video Reel IG",match:"97%",year:"2024",calidad:"4K",desc:"Time-remapping y curvas de velocidad para producciones de alto impacto."}
+        ];
+
+        const misDisenos = [
+            {portada:"Prueba-master-scaled.webp",titulo:"Render Blender 1"},
+            {portada:"SNOWSNOW.webp",titulo:"Render Blender 2"},
+            {portada:"MODELO-X3png-scaled.webp",titulo:"Render Blender 3"},
+            {portada:"MODELO-X2-scaled.webp",titulo:"Render Blender 4"},
+            {portada:"1772753035396.webp",titulo:"Render Blender 5"}
+        ];
+
+        const miExperiencia = [
+            {portada:"IMG-20210716-WA0020-scaled.webp",titulo:"Senior Video Editor",desc:"Más de 9 años dominando la narrativa rítmica y montaje avanzado."},
+            {portada:"IMG-20221010-WA0005.webp",titulo:"Motion Designer",desc:"Especialista en After Effects, VFX y composición digital."},
+            {portada:"IMG_20161204_111152-scaled.webp",titulo:"Post-Productor",desc:"Gestión completa de flujo de trabajo, desde proxies hasta color grading."},
+            {portada:"IMG-20201215-WA0135.webp",titulo:"Post-Productor",desc:"14 meses como Editor post-productor en la empresa Caraota Digital."},
+            {portada:"foto-globo.webp",titulo:"Camarografo",desc:"8 meses como camargrafo en Globovisión."},
+            {portada:"IMG-20221010-WA0005.webp",titulo:"Animador de Gráficas AE",desc:"Coordinador del departamento de Graficas y Animación en MDATV."},
+            {portada:"IMG-20221011-WA0020.webp",titulo:"Post-Productor",desc:"Post-productor en America Digital."},
+            {portada:"IMG-20220316-WA0009.webp",titulo:"Docente",desc:"Auxiliar docente de la cátedra Teoria y Práctica de la televisión en la Universidad Monteávila."},
+            {portada:"Screenshot-29.png",titulo:"UI/UX",desc:"Encargado de la interfaz de usuario de la app y versión web mobile de Discoper LLC."}
+        ];
+
+        // === FUNCIONES PRINCIPALES ===
+        function openLogin() {
+            document.getElementById('loginModal').style.display = 'flex';
+        }
+
+        function validarAcceso() {
+            const user = document.getElementById('userInput').value.toLowerCase().trim();
+            const wrapper = document.getElementById('netflix-wrapper');
+            
+            if(!user) {
+                alert("Por favor, ingresa un nombre para tu perfil.");
+                return;
+            }
+
+            // Fade Out suave
+            wrapper.style.opacity = "0";
+            
+            setTimeout(() => {
+                document.getElementById('sectionPerfiles').style.display = 'none';
+                document.getElementById('loginModal').style.display = 'none';
+                document.getElementById('mainCatalog').style.display = 'block';
+                wrapper.classList.remove('perfiles-activos');
+
+                // Ruteo inteligente por perfil
+                if(user === "invitado") mostrarCatalogo();
+                else if(user === "esposita" || user === "valeria") mostrarPerfilValeria();
+                else mostrarCatalogoProgramador(user);
+
+                wrapper.style.opacity = "1";
+                window.scrollTo(0, 0);
+            }, 600);
+        }
+
+        function moverAlEfecto(index) {
+            const contenedor = document.querySelector('.top-10-wrapper');
+            if(!contenedor) return;
+            
+            const tarjetas = document.querySelectorAll('.top-10-card');
+            const anchoTarjeta = tarjetas[0].offsetWidth + 40;
+            const desplazar = Math.max(0, (index - 1) * (anchoTarjeta * 0.85));
+            
+            contenedor.scrollTo({left: desplazar, behavior: 'smooth'});
+        }
+
+        function mostrarCatalogo() {
+            document.getElementById('mainCatalog').innerHTML = `
+                <section class="hero-container">
+                    <div class="hero-video-background">
+                        <iframe src="https://www.youtube.com/embed/sj7p0fIJyx8?autoplay=1&mute=1&controls=0&loop=1&playlist=sj7p0fIJyx8&rel=0&modestbranding=1" frameborder="0" allow="autoplay; encrypted-media"></iframe>
+                    </div>
+                    <div class="hero-overlay">
+                        <div class="hero-content">
+                            <h1>JUAN</h1>
+                            <h3>POST-PRODUCTOR SENIOR</h3>
+                            <p class="hero-description">Especialista en narrativa visual, VFX y Motion Graphics de alto nivel.</p>
+                            <div class="hero-buttons">
+                                <button class="btn-play" onclick="abrirDetalleNetflix(0)">▶ Reproducir</button>
+                                <button class="btn-info" onclick="abrirDetalleNetflix(0)">ⓘ Más info</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <h2 class="row-title">Los 10 más populares de Juan hoy</h2>
+                <div class="top-10-wrapper">
+                    ${misProyectos.map((proy, index) => `
+                        <div class="top-10-card" onmouseover="moverAlEfecto(${index})">
+                            <span class="number">${index + 1}</span>
+                            <div class="video-thumbnail" onclick="abrirDetalleNetflix(${index})">
+                                <img src="img/${proy.portada}" alt="${proy.titulo}" loading="lazy">
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <section class="suggested-section">
+                    <h2 class="row-title">Diseño y Composición</h2>
+                    <div class="suggested-grid">
+                        ${misDisenos.map((diseno) => `
+                            <div class="suggested-card">
+                                <div class="video-thumbnail suggested-thumb">
+                                    <img src="img/${diseno.portada}" alt="${diseno.titulo}" loading="lazy">
+                                </div>
+                                <div class="card-info-hover">
+                                    <div class="info-header">
+                                        <span class="match-score">95% Match</span>
+                                        <span class="year-label">2024</span>
+                                    </div>
+                                    <h3 class="card-title">${diseno.titulo}</h3>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </section>
+
+                <section class="experience-section">
+                    <h2 class="row-title">Mi Lista: Experiencia Laboral</h2>
+                    <div class="suggested-grid">
+                        ${miExperiencia.map((exp) => `
+                            <div class="suggested-card">
+                                <div class="video-thumbnail suggested-thumb">
+                                    <img src="img/${exp.portada}" alt="${exp.titulo}" loading="lazy">
+                                </div>
+                                <div class="card-info-hover">
+                                    <div class="info-header">
+                                        <span class="match-score">Seniority: +8 Años</span>
+                                    </div>
+                                    <h3 class="card-title">${exp.titulo}</h3>
+                                    <p class="card-desc">${exp.desc}</p>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </section>
+            `;
+        }
+
+        function mostrarCatalogoProgramador(nombre) {
+            document.getElementById('mainCatalog').innerHTML = `
+                <section class="hero-container programador-hero" style="background-image:url('img/Screenshot-30.png')">
+                    <div class="hero-overlay">
+                        <div class="hero-content programador-content">
+                            <h1>&gt; ${nombre.toUpperCase()} <span class="blink">_</span></h1>
+                            <h3>FULLSTACK DEVELOPER | PYTHON ARCHITECT | SQL | HTML | CSS | FLET | React.js</h3>
+                            <p class="hero-description">
+                                Especialista en convertir lógica compleja en interfaces fluidas. 
+                                Dominando el ecosistema de Python para backend y React/Flet para experiencias de usuario de alto impacto.
+                            </p>
+                            <div class="hero-buttons">
+                                <button class="btn-play">▶ Ejecutar Demo</button>
+                                <button class="btn-info" onclick="location.reload()">ⓘ Cambiar Perfil</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <h2 class="row-title">Proyectos Destacados: Backend & Algoritmos</h2>
+                <div class="suggested-grid">
+                    <div class="suggested-card">
+                        <div class="video-thumbnail suggested-thumb">
+                            <img src="img/programadorarrecho.png" alt="Full stack" loading="lazy">
+                        </div>
+                        <div class="card-info-hover">
+                            <div class="info-header"><span class="match-score">99% Match</span></div>
+                            <h3 class="card-title">Full stack</h3>
+                            <p class="card-desc">Arquitectura Escalable: Conectamos el código directamente con tu Librería de Medios.</p>
+                        </div>
+                    </div>
+                    <div class="suggested-card">
+                        <div class="video-thumbnail suggested-thumb">
+                            <img src="img/bac80e392af64d7a6cd2f6353a3531f8.jpg" alt="Frontend" loading="lazy">
+                        </div>
+                        <div class="card-info-hover">
+                            <div class="info-header"><span class="match-score">Python / GameDev</span></div>
+                            <h3 class="card-title">Frontend</h3>
+                            <p class="card-desc">WordPress + Media Library integration.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="row-title">Stack Tecnológico</h2>
+                <div class="tech-stack">
+                    <span class="tech-tag">PYTHON</span>
+                    <span class="tech-tag">SQL SERVER</span>
+                    <span class="tech-tag">FLET</span>
+                    <span class="tech-tag">REACT</span>
+                    <span class="tech-tag">DJANGO</span>
+                </div>
+            `;
+        }
+
+        function mostrarPerfilValeria() {
+            document.getElementById('mainCatalog').innerHTML = `
+                <div class="valeria-hero">
+                    <div class="valeria-content">
+                        <div class="valeria-portrait">
+                            <img src="img/ellayyo.webp" alt="Valeria" loading="lazy">
+                        </div>
+                        <div class="valeria-text">
+                            <div class="valeria-header">
+                                <span class="match-score">99% de coincidencia</span>
+                                <span style="color:var(--text-secondary)">2026</span>
+                                <span style="border:1px solid var(--text-secondary);padding:.3rem .6rem;font-size:.9rem;border-radius:3px">16+</span>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:2rem">
+                                <div class="valeria-badge">TOP 1</div>
+                                <span style="font-weight:700;font-size:1.4rem">N.º 1 en el corazón de Juan hoy</span>
+                            </div>
+                            <h1 class="valeria-title">VALERIA</h1>
+                            <p class="valeria-desc">
+                                Una historia original de amor, proyectos y sueños compartidos. 
+                                Protagonizada por la mujer que inspira cada línea de código y cada edición.
+                                Su esposo encuentra la manera de enamorarla todos los días.
+                            </p>
+                            <div class="valeria-buttons">
+                                <button class="btn-reanudar" onclick="location.reload()">◀ Reanudar</button>
+                                <button class="btn-lista">+ Mi lista</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // === MODAL VIDEO ===
+        function abrirDetalleNetflix(index) {
+            const p = misProyectos[index];
+            document.getElementById('modalIframe').src = `https://www.youtube.com/embed/${p.id}?autoplay=1&rel=0`;
+            document.getElementById('modalTitulo').textContent = p.titulo;
+            document.getElementById('modalDesc').innerHTML = `
+                <div class="info-header">
+                    <span class="match-score">${p.match} Match</span>
+                    <span style="color:var(--text-primary)">${p.year}</span>
+                    <span style="border:1px solid #666;padding:.3rem .6rem;font-size:.9rem">${p.calidad}</span>
+                </div>
+                <p style="font-size:1.2rem;line-height:1.7;color:var(--text-secondary)">${p.desc}</p>
+            `;
+            document.getElementById('netflixModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function cerrarNetflixModal() {
+            const modal = document.getElementById('netflixModal');
+            modal.style.display = 'none';
+            document.getElementById('modalIframe').src = "";
+            document.body.style.overflow = 'auto';
+        }
+
+        function cerrarModalExterno(event) {
+            if(event.target.id === 'netflixModal') cerrarNetflixModal();
+        }
+
+        // === EVENT LISTENERS GLOBALES ===
+        document.addEventListener('keydown', e => {
+            if(e.key === 'Escape') cerrarNetflixModal();
+        });
+
+        // Prevenir zoom en mobile
+        document.addEventListener('touchstart', function(event) {
+            if (event.touches.length > 1) {
+                event.preventDefault();
+            }
+        }, {passive: false});
+
+        let touchStart = null;
+        document.addEventListener('touchend', function(event) {
+            const touch = event.changedTouches[0];
+            const scale = event.scale;
+            if (touch && (scale && scale !== 1) || (touchStart && (Math.abs(touch.clientX - touchStart.clientX) < 8 && Math.abs(touch.clientY - touchStart.clientY) < 8))) {
+                event.preventDefault();
+            }
+            touchStart = null;
+        }, {passive: false});
+    </script>
+</body>
+</html>
