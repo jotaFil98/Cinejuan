@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinematic Juan | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================================================
+           EL ESTILO DE TU TEMA HIJO
+           ========================================================================== */
+        *, *::before, *::after { box-sizing: border-box; }
+
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            margin: 0; padding: 0;
+            overflow-x: hidden;
+        }
+
+        .netflix-body { 
+            background: #141414; 
+            min-height: 100vh; 
+            width: 100%;
+            display: flex; 
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center; 
+            transition: opacity 0.6s ease-in-out;
+        }
+
+        /* NAVBAR / LOGO (Equivalente al Theme Support de tu PHP) */
+        .nav-header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 4%;
+            z-index: 100;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7) 10%, transparent);
+            display: flex;
+            align-items: center;
+        }
+        .nav-logo {
+            height: 40px; /* Ajusta según el logo de tu marca */
+            cursor: pointer;
+        }
+
+        /* CATÁLOGO */
+        .row-title {
+            font-size: 1.4vw;
+            font-weight: 700;
+            color: #e5e5e5;
+            margin-left: 4%;
+            margin-top: 40px;
+            margin-bottom: 15px;
+        }
+
+        .top-10-wrapper {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 20px 4%;
+            gap: 45px;
+            scrollbar-width: none;
+        }
+        .top-10-wrapper::-webkit-scrollbar { display: none; }
+
+        .top-10-card {
+            position: relative;
+            display: flex;
+            align-items: center;
+            min-width: 280px;
+            transition: transform 0.4s ease;
+            cursor: pointer;
+        }
+        .top-10-card:hover { transform: scale(1.1); z-index: 10; }
+
+        .number {
+            font-size: 180px;
+            font-weight: 900;
+            color: #141414;
+            -webkit-text-stroke: 3px #595959;
+            line-height: 1;
+            margin-right: -40px;
+            z-index: 1;
+        }
+        .top-10-card:hover .number { -webkit-text-stroke: 3px #fff; }
+
+        .video-thumbnail img {
+            width: 160px;
+            height: 230px;
+            object-fit: cover;
+            border-radius: 4px;
+            z-index: 2;
+        }
+
+        /* HERO */
+        .hero-container {
+            position: relative;
+            width: 100%;
+            height: 80vh;
+            background: #000;
+            overflow: hidden;
+        }
+        .hero-video-background iframe {
+            width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh;
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+        .hero-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(70deg, rgba(0,0,0,0.9) 10%, transparent 60%),
+                        linear-gradient(to top, #141414 5%, transparent 30%);
+            display: flex; align-items: center; padding-left: 4%; z-index: 2;
+        }
+        .hero-content { max-width: 45%; }
+        .btn-play { background: white; color: black; padding: 12px 25px; border-radius: 4px; border: none; font-weight: bold; cursor: pointer; }
+
+        /* PERFILES */
+        .profile-gate { display: flex; gap: 30px; }
+        .profile-card { text-align: center; cursor: pointer; }
+        .profile-icon { width: 150px; height: 150px; border-radius: 4px; display: flex; justify-content: center; align-items: center; transition: 0.2s; }
+        .profile-icon:hover { border: 3px solid white; }
+        .bg-blue { background: #1e88e5; }
+        .bg-valeria { background: #e50914; }
+
+        /* MODAL */
+        .login-box { background: #181818; padding: 50px; border-radius: 8px; width: 400px; text-align: center; }
+        #userInput { width: 100%; padding: 12px; margin: 10px 0; background: #333; border: none; color: white; }
+        
+        .netflix-modal {
+            display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.9);
+            z-index: 9999; justify-content: center; align-items: flex-start;
+            padding: 50px 0; overflow-y: auto;
+        }
+        .modal-content { background: #181818; width: 90%; max-width: 850px; border-radius: 10px; position: relative; }
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 40px; color: white; cursor: pointer; z-index: 10; }
+    </style>
+</head>
+<body>
+
+<div id="netflix-wrapper" class="netflix-body">
+    
+    <div id="sectionPerfiles">
+        <h1 style="font-size: 3.5vw; text-align: center; margin-bottom: 30px;">¿Quién está viendo ahora?</h1>
+        <div class="profile-gate">
+            <div class="profile-card" onclick="openLogin()">
+                <div class="profile-icon bg-blue">
+                    <svg viewBox="0 0 24 24" fill="white" width="80px"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                </div>
+                <span style="color: #888; display: block; margin-top: 10px;">Invitado</span>
+            </div>
+            <div class="profile-card" onclick="openLogin()">
+                <div class="profile-icon bg-valeria">
+                    <svg viewBox="0 0 24 24" fill="white" width="80px"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                </div>
+                <span style="color: #888; display: block; margin-top: 10px;">Valeria</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="loginModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:1000; justify-content:center; align-items:center;">
+        <div class="login-box">
+            <h2 style="margin-bottom:20px;">Acceso Cinematográfico</h2>
+            <input type="text" id="userInput" placeholder="Escribe 'invitado' o 'valeria'">
+            <button onclick="validarAcceso()" style="width:100%; padding:15px; background:#e50914; color:white; border:none; font-weight:bold; cursor:pointer; margin-top:20px;">ENTRAR</button>
+        </div>
+    </div>
+
+    <div id="mainCatalog" style="display:none; width:100%;"></div>
+
+    <div id="netflixModal" class="netflix-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="cerrarNetflixModal()">&times;</span>
+            <div style="aspect-ratio: 16/9;">
+                <iframe id="modalIframe" width="100%" height="100%" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+            <div style="padding: 30px;">
+                <h1 id="modalTitulo" style="margin:0;"></h1>
+                <p id="modalDesc" style="color:#aaa; font-size:1.1rem;"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+const proyectos = [
+    { id: "sj7p0fIJyx8", titulo: "Motion Graphics Promo", desc: "Showreel de animación y post-producción 2024." },
+    { id: "VJDT3QK2SDc", titulo: "Continuidad y Color", desc: "Trabajo de color grading en DaVinci Resolve." },
+    { id: "wlzmrM0FVF8", titulo: "VFX & 3D Blender", desc: "Integración de elementos 3D en video real." },
+    { id: "9bbZRO4BJtE", titulo: "Publicidad High-End", desc: "Edición dinámica para marcas internacionales." },
+    { id: "5FBR0oQc5UQ", titulo: "Branding Animado", desc: "Creación de logos y elementos de marca en movimiento." }
+];
+
+function openLogin() { document.getElementById('loginModal').style.display = 'flex'; }
+
+function validarAcceso() {
+    const user = document.getElementById('userInput').value.toLowerCase().trim();
+    if(!user) return;
+
+    document.getElementById('netflix-wrapper').style.opacity = "0";
+    
+    setTimeout(() => {
+        document.getElementById('sectionPerfiles').style.display = 'none';
+        document.getElementById('loginModal').style.display = 'none';
+        document.getElementById('mainCatalog').style.display = 'block';
+
+        if (user === "valeria" || user === "esposita") {
+            cargarPerfilValeria();
+        } else {
+            cargarCatalogoPrincipal();
+        }
+        document.getElementById('netflix-wrapper').style.opacity = "1";
+    }, 500);
+}
+
+function cargarCatalogoPrincipal() {
+    const catalog = document.getElementById('mainCatalog');
+    catalog.innerHTML = `
+        <header class="nav-header">
+            <h2 style="color:#e50914; margin:0; font-weight:900;">JUAN</h2>
+        </header>
+        <section class="hero-container">
+            <div class="hero-video-background">
+                <iframe src="https://www.youtube.com/embed/sj7p0fIJyx8?autoplay=1&mute=1&controls=0&loop=1&playlist=sj7p0fIJyx8" frameborder="0"></iframe>
+            </div>
+            <div class="hero-overlay">
+                <div class="hero-content">
+                    <h1 style="font-size: 4vw; margin:0;">Showreel 2024</h1>
+                    <p style="font-size: 1.2vw; margin: 20px 0;">Post-Producción, VFX y Edición Profesional. Más de 8 años contando historias a través del lente.</p>
+                    <button class="btn-play" onclick="abrirDetalle('sj7p0fIJyx8', 'Showreel', 'Completo')">▶ Reproducir</button>
+                </div>
+            </div>
+        </section>
+        <h2 class="row-title">Proyectos Destacados</h2>
+        <div class="top-10-wrapper">
+            ${proyectos.map((p, i) => `
+                <div class="top-10-card" onclick="abrirDetalle('${p.id}', '${p.titulo}', '${p.desc}')">
+                    <span class="number">${i+1}</span>
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/${p.id}/hqdefault.jpg">
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+}
+
+function cargarPerfilValeria() {
+    document.getElementById('mainCatalog').innerHTML = `
+        <div style="height:100vh; display:flex; align-items:center; justify-content:center; background: radial-gradient(circle, #2b0000, #000); text-align:center; padding:20px;">
+            <div>
+                <h1 style="font-size:5vw; margin:0; color:#e50914;">¡Hola, Valeria!</h1>
+                <p style="color:#46d369; font-size:1.5vw;">♥ 99% Match | La mejor parte de mi día</p>
+                <p style="max-width:600px; font-size:1.2vw; margin:20px auto; color:#ccc;">Gracias por apoyarme siempre en mis inventos y códigos. Eres mi inspiración número uno.</p>
+                <button onclick="location.reload()" style="padding:10px 20px; cursor:pointer; background:white; border:none; border-radius:4px; font-weight:bold;">Volver</button>
+            </div>
+        </div>`;
+}
+
+function abrirDetalle(id, titulo, desc) {
+    document.getElementById('modalIframe').src = `https://www.youtube.com/embed/${id}?autoplay=1`;
+    document.getElementById('modalTitulo').innerText = titulo;
+    document.getElementById('modalDesc').innerText = desc;
+    document.getElementById('netflixModal').style.display = 'flex';
+}
+
+function cerrarNetflixModal() {
+    document.getElementById('netflixModal').style.display = 'none';
+    document.getElementById('modalIframe').src = "";
+}
+</script>
+</body>
+</html>
